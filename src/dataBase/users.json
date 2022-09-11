@@ -1,0 +1,72 @@
+[
+ {
+  "id": 1,
+  "nombres": "fff",
+  "apellidos": "fff",
+  "nombreUsuario": "fff",
+  "email": "mmm@mmmm.com",
+  "fechaNacimiento": "2222-02-22",
+  "domicilio": "ffff",
+  "password": "ddd",
+  "confirmPassword": "ddd",
+  "image": "default-image.png"
+ },
+ {
+  "id": 2,
+  "nombres": "matias",
+  "apellidos": "ffff",
+  "nombreUsuario": "fffff",
+  "email": "ff@fff",
+  "fechaNacimiento": "2018-11-25",
+  "domicilio": "fff",
+  "password": "fffff",
+  "confirmPassword": "fffff",
+  "image": "default-image.png"
+ },
+ {
+  "id": 3,
+  "nombres": "matias",
+  "apellidos": "loga",
+  "nombreUsuario": "mati",
+  "email": "mati@loga.com",
+  "fechaNacimiento": "2222-02-22",
+  "domicilio": "avenida",
+  "password": "$2a$10$sHF9Pj0uGQPTM3lrLEJMl.WKWd29CPBZ/LJybKGM5CPoNjKm0Z2xa",
+  "confirmPassword": "prueba",
+  "image": "User-img-1659298861120hola.png"
+ },
+ {
+  "id": 4,
+  "nombres": "Marcos",
+  "apellidos": "GO",
+  "nombreUsuario": "marcosgo",
+  "email": "hola@hotmail.com",
+  "fechaNacimiento": "1970-08-10",
+  "domicilio": "Las Lomitas",
+  "password": "$2a$10$1reSJFpqARTzR4jkK2jvf.2yhwaM8lTc0vIVu1xSUOSYalHWNjFfi",
+  "image": "User-img-1660566271128hola.jpg",
+  "admin": "true"
+ },
+ {
+  "nombres": "JuanNN",
+  "apellidos": "Doe",
+  "nombreUsuario": "JuanDoe",
+  "email": "hola2@hotmail.com",
+  "fechaNacimiento": "2022-09-27",
+  "domicilio": "Las Lajas",
+  "password": "$2a$10$Ij9pJzMmyITW5vt7Txgx..CAEzuiV2BMsCq.5dUj2G1VsDTRzwoXm",
+  "image": "User-img-1660566271128hola.jpg",
+  "id": 5
+ },
+ {
+  "nombres": "nuevo intento",
+  "apellidos": "intento",
+  "nombreUsuario": "intento",
+  "email": "intento@gmail.com",
+  "fechaNacimiento": "1111-11-21",
+  "domicilio": "dddddd",
+  "password": "$2a$10$oBkorrbkKCuvWe6qxfS9DO4.xOiaaR6lcP95u4kZ2KiBYNHSySMWu",
+  "image": "default-user.png",
+  "id": 6
+ }
+]

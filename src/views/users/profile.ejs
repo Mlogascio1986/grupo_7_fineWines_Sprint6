@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Include Head -->
+    <%- include('../partials/head.ejs') %>
+    <link rel="stylesheet" href="/css/partials.css">
+    <link rel="stylesheet" href="/css/login.css">
+    <title>FINE WINES - LOGIN</title>
+</head>
+<body>
+  <!--Incluyo el partial header-->
+  <%- include('../partials/header.ejs') %>
+    <main>
+        <br>
+        <br>
+        <!------- Formulario ---------->
+        <div class="wrapper">
+          <h2 class="form-title">Perfil de Usuario</h2>
+       
+          <div class="col-12">
+            <figure class="profile-figure">
+             <img class="profile-figure" src= "/images/users/<%= user.image %>">
+            </figure>
+          <div class="datos_user">
+          <h4>Email: <%= user.email %></h4><br>
+          <h4>Nombre: <%= user.nombreUsuario %></h4><br>
+          <h4>Apellido: <%= user.apellidos %></h4>
+          <br><br><br>
+          <div class="ocultar-mobile">
+            <br><br><br><br><br><br><br>
+          </div>
+        </div>
+        
+    </div> 
+  
+  </div>
+  <br><br>
+    
+    
+  </main>
+      <!--Incluyo el partial footer-->
+  <%- include('../partials/footer.ejs') %>
+</body>
+</html>
