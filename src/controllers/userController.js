@@ -1,10 +1,14 @@
 const path = require('path')
 const fs = require('fs');
 const jsonDB = require('../model/jsonDatabase.js');
-const userModel = jsonDB('users')
+//const userModel = jsonDB('users')
 const { validationResult } = require("express-validator");
 const bcryptjs = require('bcryptjs');
 const cookies = require('cookie-parser');
+const { User, sequelize } = require("../database/models");
+const db = require('../database/models');
+const {Op} = require('sequelize')
+
 //Objeto literal userController
 //Viene de userRouter a cada modulo
 
@@ -14,9 +18,17 @@ const userController = {
         res.render('users/login.ejs');
     },
 
-	loginProcess: (req, res) => {
+	loginProcess: async (req, res) => {
 		console.log("llego al proceso de login")
-		let userToLogin = userModel.findFirstByField("email", req.body.email)
+		//let userToLogin = userModel.findFirstByField("email", req.body.email)
+        try{
+            const userToLogin = await db.User.findOne({
+                where: {
+                    email :  {[Op.eq] : req.body.email}
+                 },
+            })} 
+        catch (error) {res.json(error.message) }
+
 
 		//console.log(req.body.nombreUsuario)
 		console.log(userToLogin)
@@ -59,7 +71,7 @@ const userController = {
     register:(req, res) => {
         res.render('users/register.ejs');
     },
-	processRegister: (req, res) => {
+	processRegister: async (req, res) => {
 
         const countries = ["Argentina", "Uruguay", "Paraguay", "Chile", "Bolivia", "Perú", "Brasil", "Ecuador", "Venezuela", "Colombia"]; 
 
@@ -87,7 +99,15 @@ const userController = {
             })
         }
         
-        const existeEmail = userModel.findFirstByField("email", req.body.email);
+        //const existeEmail = userModel.findFirstByField("email", req.body.email);
+
+        try{
+            const existeEmail = await db.User.findOne({
+                where: {
+                    email :  {[Op.eq] : req.body.email}
+                 },
+            })} 
+        catch (error) {res.json(error.message) }
 
         if(existeEmail){
             if(file){
@@ -110,37 +130,29 @@ const userController = {
 
         delete req.body.confirmPassword;
 
-        const newUsuario = {
+        /*const newUsuario = {
             ...req.body,
             password: bcryptjs.hashSync(req.body.password, 10),
             image: file ? file.filename : "default-user.png"
-        };
-
-        // newUsuario.categoria.trim();
-        userModel.create(newUsuario);
+        };*/
+        
+        try {   
+            const image = file ? file.filename : "default-user.png"
+            User.create({
+                    nombres: req.body.nombres,
+                    apellidos: req.body.apellidos,
+                    nombreUsuario: req.body.nombreUsuario,
+                    email: req.body.email,
+                    domicilio: req.body.domicilio,
+                    password: req.body.password,
+                    image: image,
+                    idRol: 1
+                });
+        } catch (error) {
+            res.json(error.message)}
 
         return res.redirect("/user/login");
-    },
-	// Create -  Method to store
-	store: (req, res) => {
-		
-		//let imagen = req.file.filename
-		const newUser = {
-			id: 1, 
-			...req.body,
-			//piso el password del body con la psw hasheada. 
-			//El objeto literal no puede tener dos passwords por eso la pisa
-			password: bcryptjs.hashSync(req.body.password, 10),
-			// Si no mando imágenes pongo na por defecto
-			//image:req.files != undefined?imagenes:"default.jpg"
-			image: req.file !== undefined ? req.file.filename : "default-image.png",
-		};
-
-		userModel.create(newUser)
-		console.log('cree un nuevo usuario')
-		res.redirect('/')
-	},
-
+    }
 }
 
 module.exports = userController

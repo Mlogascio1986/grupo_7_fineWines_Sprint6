@@ -1,9 +1,10 @@
 module.exports = (sequelize, DataTypes) => {
 
-    const alias = "users";
+    // el alias es el nombre con el cual despues voy a hacer referencia a la tabla
+    const alias = "Users";
 
     const cols = {
-        id: {
+        idUser: {
             type: DataTypes.INTEGER(10).UNSIGNED,
             primaryKey: true,
             autoIncrement: true,
@@ -13,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.string(500),
             allowNull: false 
         },
-        apellido: {
+        apellidos: {
             type: DataTypes.string(500),
             allowNull: false 
         },
@@ -29,10 +30,6 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.string(500),
             allowNull: false 
         },
-        email: {
-            type: DataTypes.string(500),
-            allowNull: false 
-        },
         domicilio: {
             type: DataTypes.string(500),
             allowNull: false 
@@ -44,6 +41,11 @@ module.exports = (sequelize, DataTypes) => {
         image: {
             type: DataTypes.string(500),
             allowNull: true
+        },
+        idRol: {
+            type: DataTypes.INTEGER(10).UNSIGNED,
+            allowNull: true,  
+            defaultValue: null
         }
         }
 
@@ -54,5 +56,14 @@ module.exports = (sequelize, DataTypes) => {
 
 
     const Users = sequelize.define(alias, cols, config);
+
+    Users.associate = function(models){
+        Users.belongsTo(models.Roles, {
+            as: 'roles',
+            foreignKey: 'IdRol'
+        }
+            )
+    }
+
     return Users;
 }
